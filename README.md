@@ -31,8 +31,7 @@ Beispielsweise:
 
 Warum Web Components / Lit?
 
-Web Components stellen einen browsernahen Standard für wiederverwendbare UI-Komponenten dar.
-Lit vereinfacht die Entwicklung solcher Web Components und bietet ein deklaratives Komponentenmodell, reaktive Properties, Templates und Styling.
+Web Components stellen einen browsernahen Standard für wiederverwendbare UI-Komponenten dar. Lit vereinfacht die Entwicklung solcher Web Components und bietet ein deklaratives Komponentenmodell, reaktive Properties, Templates und Styling.
 
 Die Architektur trennt dabei bewusst:
 
@@ -118,8 +117,7 @@ Alle anderen noch vorhanden Daten kommen aus Vite Template/Installation.
 
 ## Ziel: Vite als Library konfigurieren
 
-Für die produktive Auslieferung soll nicht die komplette Vite-Demo-Anwendung verteilt werden.
-Stattdessen soll die eigentliche Web Component als Library gebaut werden.
+Für die produktive Auslieferung soll nicht die komplette Vite-Demo-Anwendung verteilt werden. Stattdessen soll die eigentliche Web Component als Library gebaut werden.
 
 ```
 src/information-dashboard.ts

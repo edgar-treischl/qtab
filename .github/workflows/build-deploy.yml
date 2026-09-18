@@ -1,0 +1,108 @@
+name: Build & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ['main']
+    tags: ['v*']
+  pull_request:
+    branches: ['main']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION="latest"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Type check
+        run: bun run build:check
+
+      - name: Build library
+        run: bun run build
+
+      - name: Organize dist for deployment
+        run: |
+          mkdir -p staging/${{ steps.version.outputs.version }}
+          cp dist/information-dashboard.js staging/${{ steps.version.outputs.version }}/
+          cp dist/information-dashboard.umd.cjs staging/${{ steps.version.outputs.version }}/
+          
+          # Create index.html with download links
+          cat > staging/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Information Dashboard – Web Component</title>
+            <style>
+              body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
+              h1 { color: #333; }
+              .version { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 4px; }
+              .version h3 { margin-top: 0; }
+              code { background: #eee; padding: 2px 6px; border-radius: 3px; }
+            </style>
+          </head>
+          <body>
+            <h1>Information Dashboard</h1>
+            <p>Web Component library for independent deployment.</p>
+            
+            <div class="version">
+              <h3>Latest Release</h3>
+              <p><code>&lt;script type="module" src="https://edgar-treischl.github.io/qtab/latest/information-dashboard.js"&gt;&lt;/script&gt;</code></p>
+            </div>
+            
+            <h2>Installation</h2>
+            <pre>&lt;script type="module" src="https://edgar-treischl.github.io/qtab/latest/information-dashboard.js"&gt;&lt;/script&gt;
+&lt;information-dashboard title="Dashboard Title"&gt;&lt;/information-dashboard&gt;</pre>
+            
+            <h2>Releases</h2>
+            <p>All releases available in their respective version directories (e.g., <code>/v1.0.0/</code>)</p>
+            <p>See <a href="https://github.com/edgar-treischl/qtab/releases">GitHub Releases</a> for version history.</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'staging/'
+
+  deploy:
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
