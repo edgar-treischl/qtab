@@ -2,10 +2,13 @@ name: Build & Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main']
-    tags: ['v*']
+    branches:
+      - main
+    tags:
+      - 'v*'
   pull_request:
-    branches: ['main']
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
