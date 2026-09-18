@@ -1,11 +1,15 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 
-@customElement('information-dashboard')
 export class InformationDashboard extends LitElement {
 
   @property()
-  title = 'Information Dashboard';
+  declare title: string;
+
+  constructor() {
+    super();
+    this.title = 'Information Dashboard';
+  }
 
   static styles = css`
     :host {
@@ -17,6 +21,12 @@ export class InformationDashboard extends LitElement {
       padding: 1rem;
       border: 1px solid #ddd;
       border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      margin: 0 0 0.5rem 0;
+      color: #333;
     }
   `;
 
@@ -24,11 +34,10 @@ export class InformationDashboard extends LitElement {
     return html`
       <section class="dashboard">
         <h1>${this.title}</h1>
-
-        <p>
-          Hello from a Lit Web Component.
-        </p>
+        <p>Hello from Lit Web Component.</p>
       </section>
     `;
   }
 }
+
+customElements.define('information-dashboard', InformationDashboard);

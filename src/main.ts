@@ -1,9 +1,14 @@
 import './information-dashboard';
+
 const app = document.querySelector<HTMLDivElement>('#app');
 
 if (!app) {
-throw new Error('App root element not found');
+  throw new Error('App root element not found');
 }
 
-app.innerHTML = `
-<main> <information-dashboard title="Production Status" environment="production"> </information-dashboard> </main> `;
+const main = document.createElement('main');
+const dashboard = document.createElement('information-dashboard') as any;
+dashboard.title = 'Production Status';
+
+main.appendChild(dashboard);
+app.appendChild(main);
