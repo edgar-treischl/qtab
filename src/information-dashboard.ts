@@ -34,7 +34,7 @@ export class InformationDashboard extends LitElement {
     return html`
       <section class="dashboard">
         <h1>${this.title}</h1>
-        <p>Hello from Lit Web Component.</p>
+        <p>Hello Lit!</p>
       </section>
     `;
   }

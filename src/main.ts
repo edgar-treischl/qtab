@@ -8,7 +8,7 @@ if (!app) {
 
 const main = document.createElement('main');
 const dashboard = document.createElement('information-dashboard') as any;
-dashboard.title = 'Production Status';
+dashboard.title = 'Web Component / LIT';
 
 main.appendChild(dashboard);
 app.appendChild(main);
