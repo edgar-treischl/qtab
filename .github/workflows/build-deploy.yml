@@ -58,7 +58,7 @@ jobs:
           <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Information Dashboard – Web Component</title>
+            <title>Information Dashboard Web Component</title>
             <style>
               * { margin: 0; padding: 0; box-sizing: border-box; }
               body {
@@ -138,13 +138,13 @@ jobs:
           </head>
           <body>
             <header>
-              <h1>📊 Information Dashboard</h1>
+              <h1>Information Dashboard</h1>
               <p class="subtitle">Framework-agnostic Web Component built with Lit</p>
             </header>
 
             <div class="container">
               <div class="demo-section">
-                <h2>🚀 Quick Start</h2>
+                <h2>Quick Start</h2>
                 <p>Add the component to your HTML:</p>
                 <pre>&lt;script type="module" src="https://edgar-treischl.github.io/template_webcomponent/latest/information-dashboard.js"&gt;&lt;/script&gt;
 
@@ -152,21 +152,21 @@ jobs:
               </div>
 
               <div class="demo-section">
-                <h2>📦 Files</h2>
+                <h2>Files</h2>
                 <ul>
-                  <li><code>information-dashboard.js</code> – ES module (recommended)</li>
-                  <li><code>information-dashboard.umd.cjs</code> – UMD format (for older tooling)</li>
+                  <li><code>information-dashboard.js</code> - ES module (recommended)</li>
+                  <li><code>information-dashboard.umd.cjs</code> - UMD format (for older tooling)</li>
                 </ul>
                 <p style="margin-top: 15px;">All files available in <code>/latest/</code> directory.</p>
               </div>
 
               <div class="demo-section">
-                <h2>📖 Documentation</h2>
+                <h2>Documentation</h2>
                 <p>Visit the <a href="https://github.com/edgar-treischl/template_webcomponent" class="docs-link">GitHub repository</a> for full documentation, API reference, and examples.</p>
               </div>
 
               <div class="demo-section">
-                <h2>🔧 Development</h2>
+                <h2>Development</h2>
                 <pre>git clone https://github.com/edgar-treischl/template_webcomponent.git
 cd template_webcomponent
 bun install
@@ -175,7 +175,7 @@ bun run dev</pre>
             </div>
 
             <footer>
-              <p>© 2024 Information Dashboard – Web Component</p>
+              <p>© 2024 Information Dashboard - Web Component</p>
               <p><a href="https://github.com/edgar-treischl/template_webcomponent" class="docs-link">View on GitHub</a></p>
             </footer>
           </body>
